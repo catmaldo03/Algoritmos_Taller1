@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <time.h>
 
-// declaracion de funciones
-void swap(int *a, int *b);
-
 // inicio
 int main()
 {
@@ -20,7 +17,7 @@ int main()
     {
         // declaracion de variables
         int arreglo[n[k]];
-        int i, j;
+        int i, j, temp;
 
         // asignacion de valores para el mejor caso, osea que el arreglo sea ordenado
         for (i = 0; i < n[k]; i++)
@@ -35,7 +32,11 @@ int main()
             for (j = 0; j < n[k] - i - 1; j++)
             {
                 if (arreglo[j] > arreglo[j + 1])
-                    swap(&arreglo[j], &arreglo[j + 1]);
+                {
+                    temp = arreglo[j];
+                    arreglo[j] = arreglo[j + 1];
+                    arreglo[j + 1] = temp;
+                }
             }
         }
 
@@ -52,11 +53,4 @@ int main()
         // for (i = 0; i < n; i++)
         //    printf("[%d]   ", arreglo[i]);
     }
-}
-void swap(int *a, int *b)
-{
-    int aux;
-    aux = *a;
-    *a = *b;
-    *b = aux;
 }
