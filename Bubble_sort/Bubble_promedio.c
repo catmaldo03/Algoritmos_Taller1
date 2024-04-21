@@ -3,9 +3,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-// declaracion de funciones
-void swap(int *a, int *b);
-
 // inicio
 int main()
 {
@@ -15,15 +12,15 @@ int main()
 
     // declaracion de cantidad de numeros que tendria el arreglo a ordenar
     int n[] = {2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000, 22000, 24000, 26000, 28000, 30000, 32000, 34000, 36000, 38000, 40000};
-
+    int k;
     // intentos que tendria el ordenamiento
-    for (int k = 0; k < 20; k++)
+    for (k = 0; k < 20; k++)
     {
         srand(time(NULL));
 
         // declaracion de variables
         int arreglo[n[k]];
-        int i, j;
+        int i, j, temp;
 
         // asignacion de valores para el caso promedio, osea que sea al azar
         for (i = 0; i < n[k]; i++)
@@ -38,10 +35,13 @@ int main()
             for (j = 0; j < n[k] - i - 1; j++)
             {
                 if (arreglo[j] > arreglo[j + 1])
-                    swap(&arreglo[j], &arreglo[j + 1]);
+                {
+                    temp = arreglo[j];
+                    arreglo[j] = arreglo[j + 1];
+                    arreglo[j + 1] = temp;
+                }
             }
         }
-
         // termina la medicion de tiempo
         t_final = clock();
 
@@ -55,11 +55,4 @@ int main()
         // for (i = 0; i < n; i++)
         //    printf("[%d]   ", arreglo[i]);
     }
-}
-void swap(int *a, int *b)
-{
-    int aux;
-    aux = *a;
-    *a = *b;
-    *b = aux;
 }
